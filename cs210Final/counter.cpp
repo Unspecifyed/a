@@ -57,6 +57,22 @@ void printSearch()
     int count = myMap.getCount(word);
     std::cout << count << std::endl;
 }
+void printFile()
+{
+    StringCounter count = fileMapper();
+    try
+    {
+        std::ofstream outputFile("frequency.dat");
+        for (const auto &pair : count)
+        {
+            outputFile << pair.first << " " << pair.second << std::endl;
+        }
+    }
+    catch (std::exception &e)
+    {
+        std::cout << e.what() << std::endl;
+    }
+}
 void menu()
 {
     std::string input;
@@ -112,5 +128,6 @@ void menu()
 int main()
 {
     menu();
+    printFile();
     return 0;
 }
