@@ -1,0 +1,1 @@
+﻿This program makes a bicycle object that inherits from two wheel that inherits from vehicle. The bicycle object has getter setters for the variables and methods to print them. The main in the driver class makes bicycle and prints instance of statements. I guess the point was to help me the student figure out the inheritance. 
