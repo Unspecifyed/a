@@ -13,6 +13,7 @@ public class GameService {
 	/**
 	 * A list of the active games
 	 */
+
 	private static List<Game> games = new ArrayList<Game>();
 
 	/*
@@ -20,8 +21,18 @@ public class GameService {
 	 */
 	private static long nextGameId = 1;
 
-	// FIXME: Add missing pieces to turn this class a singleton 
+	// FIXME: Add missing pieces to turn this class a singleton
 
+	private static GameService instance;
+
+	private GameService() {
+	}
+
+	public static GameService getInstance() {
+		if (instance == null)
+			instance = new GameService();
+		return instance;
+	}
 
 	/**
 	 * Construct a new game instance
@@ -37,6 +48,13 @@ public class GameService {
 		// FIXME: Use iterator to look for existing game with same name
 		// if found, simply return the existing instance
 
+		for (Game igame : games) {
+			if (igame.getName() == name) {
+				game = igame;
+				break;
+			}
+
+		}
 		// if not found, make a new game instance and add to list of games
 		if (game == null) {
 			game = new Game(nextGameId++, name);
@@ -52,13 +70,14 @@ public class GameService {
 	 * <p>
 	 * Scope is package/local for testing purposes.
 	 * </p>
+	 * 
 	 * @param index index position in the list to return
 	 * @return requested game instance
 	 */
 	Game getGame(int index) {
 		return games.get(index);
 	}
-	
+
 	/**
 	 * Returns the game instance with the specified id.
 	 * 
@@ -72,6 +91,13 @@ public class GameService {
 
 		// FIXME: Use iterator to look for existing game with same id
 		// if found, simply assign that instance to the local variable
+		for (Game igame : games) {
+			if (igame.getId() == id) {
+				game = igame;
+				break;
+			}
+
+		}
 
 		return game;
 	}
