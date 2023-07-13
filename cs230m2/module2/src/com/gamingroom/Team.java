@@ -1,5 +1,8 @@
 package com.gamingroom;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * A simple class to hold information about a team
  * <p>
@@ -9,37 +12,30 @@ package com.gamingroom;
  * these values cannot be changed once a team is
  * created.
  * </p>
+ * 
  * @author coce@snhu.edu
  *
  */
-public class Team {
-	long id;
-	String name;
-	
+public class Team extends Entity {
+
+	private List<Player> players;
+
 	/*
 	 * Constructor with an identifier and name
 	 */
 	public Team(long id, String name) {
-		this.id = id;
-		this.name = name;
+		super(id, name);
+		players = new ArrayList<>();
 	}
 
-	/**
-	 * @return the id
-	 */
-	public long getId() {
-		return id;
-	}
-
-	/**
-	 * @return the name
-	 */
-	public String getName() {
-		return name;
+	public Player addPlayer(String name) {
+		long end = players.size() ;
+		players.add(new Player(end, name));
+		return players.get((int) end);
 	}
 
 	@Override
 	public String toString() {
-		return "Team [id=" + id + ", name=" + name + "]";
+		return "Team [id=" + getId() + ", name=" + getName() + "]";
 	}
 }
