@@ -25,8 +25,6 @@ import com.gamingroom.gameauth.controller.RESTClientController;
 import com.gamingroom.gameauth.healthcheck.AppHealthCheck;
 import com.gamingroom.gameauth.healthcheck.HealthCheckController;
 
-
-
 public class GameAuthApplication extends Application<Configuration> {
 	private static final Logger LOGGER = LoggerFactory.getLogger(GameAuthApplication.class);
 
@@ -35,30 +33,36 @@ public class GameAuthApplication extends Application<Configuration> {
 	}
 
 	@Override
-	public void run(Configuration c, Environment e) throws Exception 
-	{
-		
-		LOGGER.info("Registering REST resources");
- 
-		// FIXME: register GameUserRESTController (based on BasicAuth Security Example)
-		// FIXME: Create io.dropwizard.client.JerseyClientBuilder instance and give it io.dropwizard.setup.Environment reference (based on BasicAuth Security Example)
-		
+	public void run(Configuration c, Environment e) throws Exception {
 
+		LOGGER.info("Registering REST resources");
+
+		// FIXME: register GameUserRESTController (based on BasicAuth Security Example)
+		// check
+		// FIXME: Create io.dropwizard.client.JerseyClientBuilder instance and give it
+		// io.dropwizard.setup.Environment reference (based on BasicAuth Security
+		// Example) check
+
+		e.jersey().register(new GameUserRESTController(e.getValidator()));
+		final Client client = new JerseyClientBuilder(e).build("RESTClient");
+		e.jersey().register(new RESTClientController(client));
+		// The RESTClientController now has access to the configured Client object and
+		// can use it to make REST requests. PEKO
 
 		// Application health check
 		e.healthChecks().register("APIHealthCheck", new AppHealthCheck(client));
 
 		// Run multiple health checks
 		e.jersey().register(new HealthCheckController(e.healthChecks()));
-		
-		//Setup Basic Security
+
+		// Setup Basic Security
 		e.jersey().register(new AuthDynamicFeature(new BasicCredentialAuthFilter.Builder<GameUser>()
-                .setAuthenticator(new GameAuthenticator())
-                .setAuthorizer(new GameAuthorizer())
-                .setRealm("App Security")
-                .buildAuthFilter()));
-        e.jersey().register(new AuthValueFactoryProvider.Binder<>(GameUser.class));
-        e.jersey().register(RolesAllowedDynamicFeature.class);
+				.setAuthenticator(new GameAuthenticator())
+				.setAuthorizer(new GameAuthorizer())
+				.setRealm("App Security")
+				.buildAuthFilter()));
+		e.jersey().register(new AuthValueFactoryProvider.Binder<>(GameUser.class));
+		e.jersey().register(RolesAllowedDynamicFeature.class);
 	}
 
 	public static void main(String[] args) throws Exception {

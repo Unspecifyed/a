@@ -25,8 +25,9 @@ import javax.ws.rs.core.Response.Status;
 import com.gamingroom.gameauth.auth.GameUser;
 import com.gamingroom.gameauth.dao.GameUserDB;
 import com.gamingroom.gameauth.representations.GameUserInfo;
-// FIXME: Add path annotation for gameusers 
+// FIXME: Add path annotation for gameusers check
 
+@Path("/gameusers") // Add the @Path annotation for the GameUser resource PEKO
 @Produces(MediaType.APPLICATION_JSON)
 public class GameUserRESTController {
  
@@ -42,10 +43,11 @@ public class GameUserRESTController {
         return Response.ok(GameUserDB.getGameUsers()).build();
     }
  
-    // FIXME: Add RolesAllowed annotation for USER based on BasicAuth Security Example 
+    // FIXME: Add RolesAllowed annotation for USER based on BasicAuth Security Example check
 
     @GET
     @Path("/{id}")
+    @RolesAllowed("USER") // Only users with the "USER" role can access this endpoint PEKO
     public Response getGameUserById(@PathParam("id") Integer id,@Auth GameUser user) {
     	//You can validate here if user is watching his record
     	/*if(id != user.getId()){
@@ -59,9 +61,10 @@ public class GameUserRESTController {
     }
 
 
-    // FIXME: Add RolesAllowed annotation for ADMIN based on BasicAuth Security Example 
+    // FIXME: Add RolesAllowed annotation for ADMIN based on BasicAuth Security Example check
 
     @POST
+    @RolesAllowed("ADMIN") // Only users with the "ADMIN" role can access this endpoint PEKO
     public Response createGameUser(GameUserInfo gameUserInfo, @Auth GameUser user) throws URISyntaxException {
         // validation
         Set<ConstraintViolation<GameUserInfo>> violations = validator.validate(gameUserInfo);

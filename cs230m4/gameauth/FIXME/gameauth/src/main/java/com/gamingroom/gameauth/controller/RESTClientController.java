@@ -1,5 +1,5 @@
 package com.gamingroom.gameauth.controller;
- 
+
 import java.util.ArrayList;
 
 import javax.ws.rs.GET;
@@ -13,37 +13,37 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import com.gamingroom.gameauth.representations.GameUserInfo;
- 
+
 @Produces(MediaType.TEXT_PLAIN)
 @Path("/client/")
-public class RESTClientController 
-{
+public class RESTClientController {
     private Client client;
- 
+
     public RESTClientController(Client client) {
         this.client = client;
     }
-     
- // FIXME: Add annotation for GET and Path for gameusers 
 
-    public String getGameUsers()
-    {
-        //Do not hard code in your application
+    // FIXME: Add annotation for GET and Path for gameusers check
+
+    //  this method will be accessible at the endpoint /client/gameusers. PEKO
+    @GET
+    @Path("/gameusers")
+    public String getGameUsers() {
+        // Do not hard code in your application
         WebTarget webTarget = client.target("http://localhost:8080/gameusers");
-        Invocation.Builder invocationBuilder =  webTarget.request(MediaType.APPLICATION_JSON);
+        Invocation.Builder invocationBuilder = webTarget.request(MediaType.APPLICATION_JSON);
         Response response = invocationBuilder.get();
         @SuppressWarnings("rawtypes")
         ArrayList gameusers = response.readEntity(ArrayList.class);
         return gameusers.toString();
     }
-     
+
     @GET
     @Path("/gameusers/{id}")
-    public String getGameUserById(@PathParam("id") int id)
-    {
-        //Do not hard code in your application
-        WebTarget webTarget = client.target("http://localhost:8080/gameusers/"+id);
-        Invocation.Builder invocationBuilder =  webTarget.request(MediaType.APPLICATION_JSON);
+    public String getGameUserById(@PathParam("id") int id) {
+        // Do not hard code in your application
+        WebTarget webTarget = client.target("http://localhost:8080/gameusers/" + id);
+        Invocation.Builder invocationBuilder = webTarget.request(MediaType.APPLICATION_JSON);
         Response response = invocationBuilder.get();
         GameUserInfo gameUserInfo = response.readEntity(GameUserInfo.class);
         return gameUserInfo.toString();
