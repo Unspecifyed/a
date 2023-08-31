@@ -1,0 +1,3 @@
+pandoc dissm1.md -f markdown -t html -s -o diss.html
+pandoc diss.html -f html -t odt -o dis.odt
+
