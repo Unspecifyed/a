@@ -1,0 +1,44 @@
+<p>﻿
+1. <strong>Authentication</strong>:
+   - Verify that proper authentication mechanisms are in place for user access.
+   - Ensure that user credentials are securely stored, transmitted, and validated.
+   - Check for any authentication vulnerabilities like weak passwords, brute force attacks, or session fixation.</p>
+
+<ol>
+<li><p><strong>Authorization</strong>:</p>
+
+<ul>
+<li>Review the application's access control mechanisms to ensure users can only access resources and perform actions they are authorized to.</li>
+<li>Check for any misconfigurations that might allow unauthorized access to sensitive data or functionality.</li>
+</ul></li>
+<li><p><strong>Data Security</strong>:</p>
+
+<ul>
+<li>Assess data encryption mechanisms, especially for sensitive data stored in the application's database or transmitted over the network.</li>
+<li>Verify that sensitive data is adequately protected from unauthorized access or disclosure.</li>
+</ul></li>
+<li><p><strong>Input Validation and Sanitization</strong>:</p>
+
+<ul>
+<li>Ensure that user inputs are properly validated and sanitized to prevent common security vulnerabilities such as SQL injection, cross-site scripting (XSS), and remote code execution.</li>
+<li>Check for any security flaws related to command input and SpEL usage, as they can potentially lead to code injection vulnerabilities.</li>
+</ul></li>
+<li><p><strong>Session Management</strong>:</p>
+
+<ul>
+<li>Review how user sessions are managed and secured.</li>
+<li>Check for issues like session fixation, session hijacking, or insufficient session timeouts.</li>
+</ul></li>
+<li><p><strong>Error Handling and Logging</strong>:</p>
+
+<ul>
+<li>Verify that error messages do not reveal sensitive information and are handled securely.</li>
+<li>Ensure that logs are appropriately generated and reviewed for potential security incidents.</li>
+</ul></li>
+<li><p><strong>Configuration Management</strong>:</p>
+
+<ul>
+<li>Check for secure configuration practices, especially for secrets and sensitive information.</li>
+<li>Assess the application's resistance to common configuration-related security risks.</li>
+</ul></li>
+</ol>
