@@ -1,0 +1,11 @@
+{
+	"folders": [
+		{
+			"name": "Unspecifyed.github.io",
+			"path": "../../Unspecifyed.github.io"
+		}
+	],
+	"settings": {
+		"java.compile.nullAnalysis.mode": "automatic"
+	}
+}
